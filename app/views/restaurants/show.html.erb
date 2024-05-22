@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Welcome to <%= @restaurant.name %> !!</h1>
+  <div class="card">
+    <p>We propose <%= @restaurant.category %> cuisine..</p>
+    <p>Find us at <%=  @restaurant.address%></p>
+  </div>
+</div>
+
+<h2>Leave us a review..</h2>
+
+<%= simple_form_for [@restaurant, @review] do |f| %>
+  <%= f.input :content %>
+  <%= f.input :rating %>
+  <%= f.submit%>
+<% end %>
+
+<h3>Here are the diffferent reviews from our other custommers..</h3>
+
+  <% @restaurant.reviews.each do |review| %>
+    <div class="card"></div>
+        <h4><%= review.content %></h4>
+        <p>Rating :<%= "⭐"*review.rating %></p>
+    </div>
+  <% end %>
+
+
+
+<%= link_to "Go Back to the restaurants' list", restaurants_path, class: "btn btn-primary"%>
